@@ -1,6 +1,5 @@
 node_modules/
 dist/
-.codex-work/
 .tools/
 .zeroclaw-demo/
 .skillseal-data/*
