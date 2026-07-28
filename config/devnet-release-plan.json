@@ -1,0 +1,19 @@
+{
+  "cluster": "devnet",
+  "rpc": "https://api.devnet.solana.com",
+  "repoAsset": "gMBKWhGPtf2JSJSvyybg7wYD5aZaGbXs7PK69hVe2RK",
+  "publisher": "DK5SkZ5Lui2WQkMZD3reHBPSTf166Xwmuqua5sfzStXS",
+  "expectedCurrentName": "skillseal-guardian-demo",
+  "expectedCurrentVersion": "0.1.0",
+  "expectedCurrentLicense": "Apache-2.0",
+  "expectedCurrentEntrypoint": "SKILL.md",
+  "expectedCurrentSha256": "f51154e44a63cb7858805af37f1105e2ccda749c6d97f3cf974293b58320f457",
+  "expectedCurrentHead": "DLvajTGajD2bHnvu12j44HQHXsLoYt2CSUpuBYubTeFc",
+  "expectedParentSha256": "f51154e44a63cb7858805af37f1105e2ccda749c6d97f3cf974293b58320f457",
+  "candidateDirectory": "fixtures/competition-skill",
+  "candidateName": "skillseal-guardian-demo",
+  "candidateVersion": "0.2.0",
+  "candidateLicense": "Apache-2.0",
+  "candidateEntrypoint": "SKILL.md",
+  "candidateSha256": "ac205b5411c74703f15d20be023b8adf18f44b6530560cb85bce787604311b6b"
+}

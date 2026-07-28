@@ -1,0 +1,42 @@
+# This is a configuration fragment, not a complete ZeroClaw config.
+# Replace every /absolute/path placeholder before use.
+
+[[mcp.servers]]
+name = "skillseal"
+transport = "stdio"
+command = "/absolute/path/to/node"
+args = ["/absolute/path/to/skillseal/dist/index.js"]
+tool_timeout_secs = 60
+
+[mcp_bundles.skillseal]
+servers = ["skillseal"]
+
+[skill_bundles.skillseal_approved]
+directory = "/absolute/path/to/skillseal/approved-skills"
+
+[skill_bundles.skillseal_control]
+directory = "/absolute/path/to/skillseal/skills"
+
+[risk_profiles.skillseal_demo]
+level = "supervised"
+auto_approve = [
+  "skillseal__probe",
+  "skillseal__inspect",
+  "skillseal__status",
+]
+always_ask = ["skillseal__install"]
+
+# MCP names containing "__" have special admission semantics in ZeroClaw.
+# Keep this MCP server dedicated to SkillSeal and list any future destructive
+# sibling explicitly in excluded_tools until it is ready for Agent access.
+excluded_tools = []
+
+[agents.skillseal_demo]
+risk_profile = "skillseal_demo"
+mcp_bundles = ["skillseal"]
+skill_bundles = ["skillseal_control", "skillseal_approved"]
+
+# SkillSeal's cluster, archive, script, frozen-snapshot, receipt and trust
+# policies are enforced inside the MCP server. policies/default.toml is the
+# auditable mirror; trusted publishers are provided out of band through the
+# MCP process environment and remain empty/fail-closed by default.

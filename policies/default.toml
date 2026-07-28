@@ -1,0 +1,20 @@
+# Auditable mirror of the fail-closed policy compiled into SkillSeal v0.1.
+# These values are intentionally not runtime-weakenable through ZeroClaw chat
+# or agent configuration. The trusted-authority list is supplied out of band
+# through SKILLSEAL_TRUSTED_AUTHORITIES and is empty by default.
+
+version = 1
+cluster_allowlist = ["devnet", "mainnet-beta"]
+standard_allowlist = ["onchain-skill/0.1"]
+require_frozen_snapshot = true
+require_trusted_authority = true
+allow_scripts = false
+max_archive_bytes = 1048576
+max_expanded_bytes = 4194304
+max_files = 64
+max_path_bytes = 240
+inspection_ttl_seconds = 600
+install_bundle = "skillseal_approved"
+
+# Empty by default: unknown publishers must become REVIEW_BLOCKED.
+trusted_authorities = []
