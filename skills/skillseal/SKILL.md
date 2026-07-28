@@ -20,6 +20,61 @@ Use SkillSeal when the user asks to inspect, verify, install, or monitor a Gitla
 9. Never auto-update an installed Skill. Report a changed repo head or hash and require a fresh inspection.
 10. After installation, state that a new ZeroClaw session is required before the newly installed Skill can be loaded.
 
+## Concise operator commands and response language
+
+Treat the following short forms as complete operator requests:
+
+- `/inspect <cluster> <asset>`: inspect the supplied on-chain Asset.
+- `/install`: install the most recent unambiguous, unexpired `PASS_REQUIRES_APPROVAL` inspection from the current conversation.
+- `/install <inspection_id>`: install the specified eligible inspection.
+- `/status`: report the status of the most recent inspection from the current conversation.
+
+The operator does not need to retype an inspection id when exactly one fresh, eligible receipt is already present in the current conversation. Never infer `/install` from a denied, expired, ambiguous, or merely mentioned inspection. If more than one fresh eligible receipt is present, ask the operator to provide the inspection id.
+
+Unless the operator explicitly requests another language, use concise English for inspection, denial, approval, installation, and status responses. Do not add a translated summary after the structured result.
+
+After a denied inspection, return only the key result values:
+
+```text
+Inspection denied
+verdict=DENY
+installEligible=false
+finding=<highest-severity-finding-code>
+```
+
+If `/install` has no eligible receipt, do not call the installation tool or present an approval control. Return:
+
+```text
+Installation blocked
+reason=NO_ELIGIBLE_INSPECTION
+approvalPresented=false
+```
+
+After an eligible inspection, return only the key result values:
+
+```text
+Inspection passed
+verdict=PASS_REQUIRES_APPROVAL
+inspection_id=<inspection_id>
+installEligible=true
+frozen=<frozen>
+sha256=<sha256>
+approvalRequired=true
+```
+
+After a successful installation, return this compact English summary using the actual result values:
+
+```text
+Installation successful
+verdict=INSTALLED_PINNED
+inspection_id=<inspection_id>
+directory=<directoryName>
+sha256=<sha256>
+receipt=CONSUMED
+payloadExecuted=false
+requiresNewSession=true
+```
+
 ## Probe stage
 
 For an integration health check, call `skillseal__probe` with a non-secret nonce and return its JSON fields without embellishment. Do not describe the probe as a completed Solana inspection.

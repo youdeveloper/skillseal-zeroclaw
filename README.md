@@ -43,11 +43,12 @@ mutable Repo
 | Gitlana Repo | [`gMBKWhGPtf2JSJSvyybg7wYD5aZaGbXs7PK69hVe2RK`](https://explorer.solana.com/address/gMBKWhGPtf2JSJSvyybg7wYD5aZaGbXs7PK69hVe2RK?cluster=devnet) |
 | v0.1 frozen snapshot | [`DLvajTGajD2bHnvu12j44HQHXsLoYt2CSUpuBYubTeFc`](https://explorer.solana.com/address/DLvajTGajD2bHnvu12j44HQHXsLoYt2CSUpuBYubTeFc?cluster=devnet) |
 | v0.2 frozen child snapshot | [`7XfnNChJq8qGK8CYeEcs7HxLD5MyeR1A8FgfPLbkTYgU`](https://explorer.solana.com/address/7XfnNChJq8qGK8CYeEcs7HxLD5MyeR1A8FgfPLbkTYgU?cluster=devnet) |
+| Unsafe frozen snapshot (negative control) | [`PEqVcBkJGA3WYeVFPFsVfNPP3ug1dHKqSUHaAGPV662`](https://explorer.solana.com/address/PEqVcBkJGA3WYeVFPFsVfNPP3ug1dHKqSUHaAGPV662?cluster=devnet) |
 | v0.2 payload SHA-256 | `ac205b5411c74703f15d20be023b8adf18f44b6530560cb85bce787604311b6b` |
 | v0.2 verdict | `PASS_REQUIRES_APPROVAL` |
 | Installed verdict | `INSTALLED_PINNED`, receipt `CONSUMED`, payload not executed |
 | Fresh-session result | `approval=HUMAN`, `payload=PINNED`, `execution=READ_ONLY` |
-| Local verification | `35/35` deterministic tests passing |
+| Local verification | `37/37` deterministic tests passing |
 
 Final chain, approval, installation, and fresh-session evidence is consolidated in [Verification](docs/VERIFICATION.md).
 

@@ -64,13 +64,31 @@ Start the isolated daemon with its config directory:
 ./.tools/zeroclaw-v0.8.3/zeroclaw --config-dir /absolute/path/to/isolated-config daemon
 ```
 
-## 4. Inspect the public v0.2 snapshot
+## 4. Reproduce the denied negative control
 
-From the bound Telegram conversation, ask the agent to call `skillseal__inspect` with:
+From the bound Telegram conversation, use the concise operator command:
 
 ```text
-cluster: devnet
-asset: 7XfnNChJq8qGK8CYeEcs7HxLD5MyeR1A8FgfPLbkTYgU
+/inspect devnet PEqVcBkJGA3WYeVFPFsVfNPP3ug1dHKqSUHaAGPV662
+```
+
+Expected security-relevant fields:
+
+```text
+verdict: DENY
+installEligible: false
+finding: SCRIPT_FILE_FORBIDDEN
+sha256: c6cea1db0aa064d84da6f9a8c4bdd1f877d4ad745484acd26440ba6f3fbf413d
+```
+
+The public Asset is a frozen snapshot with a valid hash and a harmless script-like fixture. The denial is deliberate: the default local policy does not permit script files. Do not request installation after a denied inspection; SkillSeal must not present an approval control.
+
+## 5. Inspect the public v0.2 snapshot
+
+From the bound Telegram conversation, use:
+
+```text
+/inspect devnet 7XfnNChJq8qGK8CYeEcs7HxLD5MyeR1A8FgfPLbkTYgU
 ```
 
 Expected security-relevant fields:
@@ -87,9 +105,9 @@ semantic signals: []
 
 The finalized slot and new `inspection_id` will differ. The receipt expires after ten minutes.
 
-## 5. Exercise the approval boundary
+## 6. Exercise the approval boundary
 
-Ask the agent to call `skillseal__install` with only the exact fresh `inspection_id`.
+Send `/install`. The control Skill may resolve it only when the current conversation contains exactly one fresh, eligible inspection receipt; otherwise provide the exact `inspection_id` explicitly.
 
 ZeroClaw must display its native approval control. First-time reviewers can click **Deny** to prove that chat text is not sufficient and that no files are written. Run a fresh inspection before an approved attempt.
 
@@ -105,7 +123,7 @@ requiresNewSession: true
 
 Do not approve if the Asset, hash, publisher, verdict, or tool argument differs from the inspection output.
 
-## 6. Load in a fresh session
+## 7. Load in a fresh session
 
 Restart the isolated ZeroClaw daemon with the same configuration. Ask the newly created session to run `skillseal-guardian-demo` and return only its specified result.
 

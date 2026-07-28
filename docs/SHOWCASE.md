@@ -10,7 +10,7 @@ Even a passing result is not installed automatically. SkillSeal creates a short-
 
 ## Who it is for
 
-SkillSeal is for ZeroClaw operators, teams, and marketplaces that want to distribute on-chain Skills without treating immutability as proof of safety. It is especially useful when an agent discovers a Skill by address but the human operator still owns the trust and installation decision.
+SkillSeal is for ZeroClaw operators, teams, and marketplaces that want to distribute on-chain Skills without treating immutability as proof of safety. It is especially useful when an agent discovers a Skill by address but the human operator still owns the trust and installation decision. The recurring operator job is the same one a package manager performs for every install or update: decide whether one exact published version may cross from an untrusted distribution rail into the local runtime.
 
 ## Why Solana matters
 
@@ -22,6 +22,8 @@ Public demo lineage:
 - v0.1 snapshot: `DLvajTGajD2bHnvu12j44HQHXsLoYt2CSUpuBYubTeFc`
 - v0.2 child snapshot: `7XfnNChJq8qGK8CYeEcs7HxLD5MyeR1A8FgfPLbkTYgU`
 - v0.2 SHA-256: `ac205b5411c74703f15d20be023b8adf18f44b6530560cb85bce787604311b6b`
+- unsafe frozen snapshot: `PEqVcBkJGA3WYeVFPFsVfNPP3ug1dHKqSUHaAGPV662`
+- unsafe snapshot verdict: `DENY` (`SCRIPT_FILE_FORBIDDEN`)
 
 ## ZeroClaw features used
 
@@ -49,7 +51,9 @@ The design defends against mutable-head swaps, untrusted publishers, prompt inje
 - SQLite evidence store and short-lived one-time receipts.
 - Receipt-bound, tamper-detecting atomic installer.
 - Devnet-only, lineage-safe authoring tool with offline-by-default interlocks.
-- 35 passing security and integration tests covering both hostile and approved paths.
+- 37 passing security and integration tests covering both hostile and approved paths.
+
+This is deliberately a local stdio MCP boundary rather than a standalone WASM component. Inspecting public Solana data is read-only, while the final operation must write into a dedicated local ZeroClaw Skill Bundle. Keeping that host-side effect behind a narrow MCP tool and ZeroClaw's native `always_ask` control makes the filesystem authority explicit and human-gated.
 
 ## Live result
 

@@ -13,6 +13,9 @@ test("public ZeroClaw example exposes only implemented SkillSeal tools", async (
 
   const autoApprove = config.match(/auto_approve\s*=\s*\[([\s\S]*?)\]/)?.[1] ?? "";
   assert.doesNotMatch(autoApprove, /skillseal__install/);
+  assert.match(config, /excluded_tools\s*=\s*\[[\s\S]*"sessions_current"[\s\S]*"sessions_history"[\s\S]*\]/);
+  assert.match(config, /\[agents\.skillseal_demo\.precheck\][\s\S]*enabled\s*=\s*false/);
+  assert.match(config, /\[runtime_profiles\.skillseal_bounded\.thinking\][\s\S]*default_level\s*=\s*"off"/);
 });
 
 test("public policy mirror names the real approved bundle and remains fail closed", async () => {

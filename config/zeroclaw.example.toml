@@ -29,12 +29,38 @@ always_ask = ["skillseal__install"]
 # MCP names containing "__" have special admission semantics in ZeroClaw.
 # Keep this MCP server dedicated to SkillSeal and list any future destructive
 # sibling explicitly in excluded_tools until it is ready for Agent access.
-excluded_tools = []
+# Session introspection is unnecessary for the single-conversation install
+# flow and could create unrelated approval prompts.
+excluded_tools = [
+  "sessions_current",
+  "sessions_history",
+  "sessions_list",
+  "sessions_send",
+]
 
 [agents.skillseal_demo]
 risk_profile = "skillseal_demo"
+runtime_profile = "skillseal_bounded"
 mcp_bundles = ["skillseal"]
 skill_bundles = ["skillseal_control", "skillseal_approved"]
+
+[agents.skillseal_demo.precheck]
+enabled = false
+timeout_secs = 5
+
+[runtime_profiles.skillseal_bounded]
+max_tool_iterations = 4
+max_history_messages = 12
+max_context_tokens = 16000
+compact_context = true
+parallel_tools = false
+max_system_prompt_chars = 12000
+max_tool_result_chars = 20000
+keep_tool_context_turns = 2
+
+[runtime_profiles.skillseal_bounded.thinking]
+default_level = "off"
+native_thinking = false
 
 # SkillSeal's cluster, archive, script, frozen-snapshot, receipt and trust
 # policies are enforced inside the MCP server. policies/default.toml is the

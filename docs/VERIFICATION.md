@@ -7,7 +7,7 @@ This document contains the final evidence needed to evaluate the submitted use c
 The final public tree passes:
 
 ```text
-npm run check: 35/35 tests passed
+npm run check: 37/37 tests passed
 npm run release:candidate: passed
 candidate networkAccessed: false
 candidate published: false
@@ -32,20 +32,22 @@ SHA-256: ac205b5411c74703f15d20be023b8adf18f44b6530560cb85bce787604311b6b
 | Mutable Gitlana Repo | [`gMBKWhGPtf2JSJSvyybg7wYD5aZaGbXs7PK69hVe2RK`](https://explorer.solana.com/address/gMBKWhGPtf2JSJSvyybg7wYD5aZaGbXs7PK69hVe2RK?cluster=devnet) | Version `0.2.0`; head points to v0.2 |
 | v0.1 snapshot | [`DLvajTGajD2bHnvu12j44HQHXsLoYt2CSUpuBYubTeFc`](https://explorer.solana.com/address/DLvajTGajD2bHnvu12j44HQHXsLoYt2CSUpuBYubTeFc?cluster=devnet) | Frozen genesis snapshot |
 | v0.2 child snapshot | [`7XfnNChJq8qGK8CYeEcs7HxLD5MyeR1A8FgfPLbkTYgU`](https://explorer.solana.com/address/7XfnNChJq8qGK8CYeEcs7HxLD5MyeR1A8FgfPLbkTYgU?cluster=devnet) | Frozen; no update authority; parent is v0.1 |
+| Unsafe negative-control snapshot | [`PEqVcBkJGA3WYeVFPFsVfNPP3ug1dHKqSUHaAGPV662`](https://explorer.solana.com/address/PEqVcBkJGA3WYeVFPFsVfNPP3ug1dHKqSUHaAGPV662?cluster=devnet) | Frozen; valid hash and native audit; denied by local script policy |
 
 The v0.2 Repo update, child-snapshot creation, payload write, freeze, and head switch produced six finalized Devnet transactions with `err=null`. Total cost was `0.00993572` Devnet SOL, which has no real-money value. The Devnet authoring key is not part of the submitted runtime and is not present in this repository.
 
 ## Real negative inspection
 
-A third-party frozen Mainnet Gitlana snapshot was inspected through the real Telegram → ZeroClaw → SkillSeal path. Its chain metadata and payload SHA-256 were valid, its archive passed bounded preflight, and its exact bytes passed ZeroClaw native audit. SkillSeal still returned:
+The dedicated frozen Devnet negative-control snapshot was inspected through the real Telegram → ZeroClaw → SkillSeal path used in the final video. At finalized slot `479431699`, its chain metadata, publisher, and payload SHA-256 were valid, its archive passed bounded preflight, and its exact bytes passed ZeroClaw native audit. The archive still contained `scripts/harmless-demo.mjs`, so the deterministic local policy returned:
 
 ```text
 verdict: DENY
 installEligible: false
 finding: SCRIPT_FILE_FORBIDDEN
+sha256: c6cea1db0aa064d84da6f9a8c4bdd1f877d4ad745484acd26440ba6f3fbf413d
 ```
 
-This proves that frozen state and a correct on-chain hash are not treated as evidence of publisher trust or content safety.
+No approval control was presented and no installation was attempted. This proves that frozen state, a correct on-chain hash, a trusted publisher, and a passing native audit are not treated as evidence that the payload satisfies the operator's local policy.
 
 ## Real positive inspection and approval
 
