@@ -26,6 +26,8 @@ SkillSeal turns that gap into a supervised ZeroClaw workflow:
 
 The following path was completed through a dedicated Telegram bot, ZeroClaw v0.8.3, the SkillSeal MCP server, and Solana Devnet:
 
+**Live demo:** [47.7-second Telegram showcase on YouTube](https://youtube.com/shorts/t8tzv5qQ1rU) — real channel, no slides.
+
 ```text
 mutable Repo
   -> v0.1 frozen snapshot

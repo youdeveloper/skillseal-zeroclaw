@@ -1,5 +1,7 @@
 # SkillSeal showcase
 
+**Live demo:** [47.7-second Telegram showcase on YouTube](https://youtube.com/shorts/t8tzv5qQ1rU) — real ZeroClaw channel, no slides.
+
 ## What I built
 
 SkillSeal is a human-approved installation firewall for Gitlana skills hosted on Solana and consumed by ZeroClaw.
